@@ -1,0 +1,52 @@
+.container-landing {
+  max-width: 900px;
+}
+.book--container-cover {
+  display: flex;
+  flex-direction: row;
+  max-width: 1000px;
+
+  margin-top: 40px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.book--container {
+  margin-right: 100px;
+  width: 60%;
+  display: flex;
+  flex-direction: row;
+}
+
+.book--image img {
+  height: 260px;
+  width: 200px;
+}
+.book--container-list {
+  margin-top: 40px;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.book--container-list {
+  width: 20%;
+  max-height: 270px;
+  margin-right: 100px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.book--image-list img {
+  width: 100px;
+  height: 100px;
+}
+.book-desc-list {
+  width: 100%;
+}
+.book-desc-list h4 {
+  font-size: 12px;
+}

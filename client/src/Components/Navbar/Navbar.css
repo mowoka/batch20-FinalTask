@@ -1,0 +1,19 @@
+.navbar--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.navbar--menu-button {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-right: 100px;
+}
+.navabar--btn-login {
+  margin-right: 20px;
+}
+.navabar--btn-login:hover {
+  background-color: gray;
+  color: #fff;
+}
