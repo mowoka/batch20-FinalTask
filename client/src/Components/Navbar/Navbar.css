@@ -4,6 +4,10 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.navbar--menu-logo {
+  margin-top: 20px;
+  margin-left: 80px;
+}
 .navbar--menu-button {
   display: flex;
   flex-direction: row;
@@ -12,8 +16,29 @@
 }
 .navabar--btn-login {
   margin-right: 20px;
+  font-weight: 500;
 }
-.navabar--btn-login:hover {
-  background-color: gray;
+.navabar--btn-login button {
+  padding-left: 30px;
+  padding-right: 30px;
+  border: 1px solid #393939;
+  font-weight: 800;
+}
+.navabar--btn-login button:hover {
+  color: #ffff;
+  background-color: #393939;
+}
+.navabar--btn-register button {
+  padding-left: 30px;
+  padding-right: 30px;
   color: #fff;
+  background-color: #393939;
+  font-weight: 800;
+}
+.navabar--btn-register button:hover {
+  color: #ffff;
+  background-color: #393939;
+}
+.navabar--btn-register button:focus {
+  background-color: #393939;
 }

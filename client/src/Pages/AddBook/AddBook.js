@@ -12,7 +12,7 @@ const AddBook = () => {
   const [state, dispatch] = useContext(AppContext);
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   const { user } = state;
-  const linkImageDefault = `http://localhost:5000/uploads/${user.profileImage}`;
+  const linkImage = `http://localhost:5000/uploads/${user.avatar}`;
 
   const [formBook, setFormBook] = useState({
     title: "",
@@ -109,7 +109,7 @@ const AddBook = () => {
     <div className="addbook--menu-container">
       <div className="transaction--menu-header">
         <div className="header--menu-logo">
-          <img src="image/beranda/wow-icon.png" alt="wow-logo" />
+          <img src="image/logo.png" alt="wow-logo" />
         </div>
         <div className="header--menu-profile">
           <img
@@ -118,18 +118,14 @@ const AddBook = () => {
               position: "relative",
               borderRadius: "50%",
             }}
-            src={
-              linkImageDefault
-                ? linkImageDefault
-                : "image/beranda/admin-icon.png"
-            }
+            src={linkImage ? linkImage : "image/beranda/admin-icon.png"}
             alt="admin-avatar"
             onClick={handleShowDropDownProfile}
           />
           {showDropDownProfile ? (
             <div className="dropdown--menu-profile">
               <div className="dropdown--poligon">
-                <img src="image/beranda/action-icon-2.png" alt="arrow" />
+                <img src="image/action-icon-2.png" alt="arrow" />
               </div>
               <div className="dropdown--menu-list">
                 <div className="dropdown--addbook">
@@ -236,15 +232,9 @@ const AddBook = () => {
               onChange={(e) => onChange(e)}
               value={description}
             />
-            <input
-              type="file"
-              id="actual-btn"
-              onChange={(e) => onChange(e)}
-              name="bookAttachment"
-            />
             <label
               style={{ marginTop: "30px" }}
-              for="actual-btn"
+              for="bookAttachment-btn"
               className="form-body-file"
             >
               <p>Attact Boook File</p>
@@ -252,13 +242,19 @@ const AddBook = () => {
             </label>
             <input
               type="file"
-              id="actual-btn"
+              id="bookAttachment-btn"
+              onChange={(e) => onChange(e)}
+              name="bookAttachment"
+            />
+            <input
+              type="file"
+              id="thumbnail-btn"
               onChange={(e) => onChange(e)}
               name="thumbnail"
             />
             <label
               style={{ marginTop: "30px" }}
-              for="actual-btn"
+              for="thumbnail-btn"
               className="form-body-file"
             >
               <p>Attact Thumbnail File</p>

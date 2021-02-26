@@ -1,0 +1,180 @@
+.checout--container {
+  max-width: 1360px;
+  overflow: hidden;
+}
+.checkout--content-menu {
+  display: flex;
+  flex-direction: column;
+  max-width: 1100px;
+  margin-left: 120px;
+  margin-top: 80px;
+}
+.checkout--menu-title h4 {
+  font-size: 24px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 700;
+}
+.checkout--menu-title p {
+  font-size: 18px;
+  margin-top: 30px;
+}
+.checkout--menu-charts {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.checkout--menu-item {
+  flex: 2;
+  border-top: 1px solid #393939;
+  border-bottom: 1px solid #393939;
+  margin-bottom: 80px;
+}
+.--checkout-item-col {
+  display: flex;
+  flex-direction: column;
+}
+.checkout--menu-payment {
+  flex: 1;
+  margin-left: 30px;
+  border-top: 1px solid #393939;
+}
+.checkout-item {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.checkout-item-content {
+  flex: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.--checkout-content-img img {
+  width: 140px;
+  height: 180px;
+}
+.--checkout-content-desc {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.--checkout-content-desc h4 {
+  font-size: 22px;
+  font-weight: bold;
+  height: 40px;
+}
+.--checkout-content-desc small {
+  font-size: 14px;
+  height: 20px;
+  margin-top: 10px;
+  color: gray;
+}
+.--checkout-content-desc p {
+  font-size: 18px;
+  margin-top: 25px;
+  color: green;
+}
+.checkout-item-icon {
+  cursor: pointer;
+}
+.checkout-payment-desc {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.checkout-payment-desc hr {
+  background-color: #393939;
+}
+.--payment-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: sans-serif;
+}
+.--payment-title h4 {
+  flex: 3;
+  font-size: 12px;
+}
+.--payment-title p {
+  font-size: 12px;
+}
+.--payment-number {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: sans-serif;
+}
+.--payment-number h4 {
+  flex: 3;
+  font-size: 12px;
+}
+.--payment-number p {
+  font-size: 12px;
+}
+.--payment-money {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-family: sans-serif;
+  color: green;
+  font-weight: 900;
+}
+.--payment-money h4 {
+  flex: 3;
+  font-size: 12px;
+  font-weight: 900;
+}
+.--payment-money p {
+  font-size: 12px;
+}
+.checkout--payment-action {
+  display: flex;
+  flex-direction: column;
+  float: right;
+}
+.checkout-action {
+  display: flex;
+  flex-direction: column;
+  border: 4px dashed black;
+  height: 150px;
+  width: 250px;
+  justify-content: center;
+  align-items: center;
+  background-color: #eaeaea;
+}
+.--action-image img {
+  margin-top: 20px;
+}
+label {
+  cursor: pointer;
+  margin-top: 10px;
+  color: #393939;
+  font-size: 14px;
+  /* Style as you please, it will become the visible UI component. */
+}
+#upload-photo {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.checkout-button input {
+  color: #fff;
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  width: 250px;
+  background-color: #393939;
+}
+.checkout-button input:hover {
+  color: #fff;
+}

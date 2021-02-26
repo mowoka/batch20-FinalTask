@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Modal, Form } from "react-bootstrap";
 import { API } from "../config/api";
+import { AppContext } from "../Context/globalContext";
 
-const SettingProfile = ({
-  show,
-  handleClose,
-  GetProfile,
-  posts,
-  profile,
-  setPosts,
-}) => {
+const SettingProfile = ({ show, handleClose }) => {
   const [message, setMessage] = useState("");
+  const [state, dispatch] = useContext(AppContext);
 
-  const { email, fullName, role, gender, phone, address, avatar } = posts;
+  const [formProfile, setFormProfile] = useState({
+    gender: "",
+    phone: "",
+    address: "",
+    avatar: null,
+  });
+
+  const { gender, phone, address, avatar } = formProfile;
 
   const onChange = (e) => {
-    const updateForm = { ...posts };
+    const updateForm = { ...formProfile };
     updateForm[e.target.name] =
       e.target.type === "file" ? e.target.files[0] : e.target.value;
-    setPosts(updateForm);
+    setFormProfile(updateForm);
   };
 
   const onSubmit = async (e) => {
@@ -28,8 +30,8 @@ const SettingProfile = ({
       const body = new FormData();
 
       body.append("gender", gender);
-      body.append("noHp", phone);
-      body.append("alamat", address);
+      body.append("phone", phone);
+      body.append("address", address);
       body.append("avatar", avatar);
 
       const config = {
@@ -44,17 +46,25 @@ const SettingProfile = ({
 
       setMessage(response.status);
 
-      if (post.data.status === "Success") {
-        GetProfile();
-        setPosts({
-          ...post,
-          avatar: `http://localhost:5000/uploads/${post.data.data.user.avatar}`,
+      if (response.status == "Success") {
+        dispatch({
+          type: "UPDATE_PROFILE",
+          payload: response.data.user,
         });
       }
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    setFormProfile({
+      gender: state.user.gender,
+      phone: state.user.phone,
+      address: state.user.address,
+      avatar: null,
+    });
+  }, []);
 
   return (
     <>
@@ -79,26 +89,23 @@ const SettingProfile = ({
           <Form onSubmit={(e) => onSubmit(e)}>
             <input
               type="text"
-              placeholder="Male / Female"
+              placeholder={gender ? gender : "Male / Female"}
               className="form-control mt-5"
               name="gender"
               onChange={(e) => onChange(e)}
-              value={gender}
             />
             <input
               type="text"
-              placeholder="Phone Number"
+              placeholder={phone ? phone : "Phone Number"}
               className="form-control mt-3"
-              name="noHp"
-              value={phone}
+              name="phone"
               onChange={(e) => onChange(e)}
             />
             <input
               type="text"
-              placeholder="Addresss"
+              placeholder={address ? address : "Addresss"}
               className="form-control mt-3"
-              name="alamat"
-              value={address}
+              name="address"
               onChange={(e) => onChange(e)}
             />
             <input

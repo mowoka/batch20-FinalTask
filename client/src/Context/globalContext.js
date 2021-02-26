@@ -27,8 +27,6 @@ const reducer = (state, action) => {
         ...state,
         isLogin: true,
         isLoading: false,
-        email: action.payload.email,
-        fullName: action.payload.fullName,
         user: {
           ...state.user,
           role: action.payload.role,
@@ -77,17 +75,50 @@ const reducer = (state, action) => {
     case "ADD_TOKEN":
       localStorage.setItem("token", action.payload.token);
       return { ...state };
+    case "UPDATE_PROFILE":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          gender: action.payload.gender,
+          phone: action.payload.phone,
+          address: action.payload.address,
+          avatar: action.payload.avatar,
+        },
+      };
     case "ADD_CART":
+      const filterBook = state.carts.filter(
+        (book) => book.id === action.payload.id
+      );
+
+      if (filterBook.length > 0) {
+        return {
+          ...state,
+          carts: [...state.carts],
+        };
+      }
       return {
         ...state,
         carts: [...state.carts, action.payload],
       };
+    case "REMOVE_CART":
+      return {
+        ...state,
+        carts: state.carts.filter((book) => book.id !== action.payload.id),
+      };
+    case "RELEASE_CART":
+      return {
+        ...state,
+        carts: [],
+      };
+
     case "AUTH_ERROR":
     case "LOGOUT":
       localStorage.removeItem("token");
       return {
         ...state,
         isLogin: false,
+        isLoading: false,
         user: {
           email: "",
           fullName: "",
@@ -97,6 +128,7 @@ const reducer = (state, action) => {
           address: "",
           avatar: "",
         },
+        carts: [],
       };
     default:
       throw new Error();

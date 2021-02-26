@@ -1,0 +1,144 @@
+.container-landing {
+  max-width: 1360px;
+  overflow: hidden;
+}
+.container--cover-page {
+  width: 100%;
+  height: 450px;
+  background-color: #fff;
+}
+.container--cover-item {
+  width: 100%;
+  margin-top: -360px;
+}
+.landing--headline {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.landing--headline h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 24px;
+}
+.landing--headline h4 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 26px;
+}
+.book--promo-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  margin-top: 80px;
+  /* margin-left: 20px; */
+}
+.--promo-book-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-right: 90px;
+}
+.--promo-book-box img {
+  width: 220px;
+  height: 300px;
+}
+.--promo-book-desc {
+  background-color: #fff;
+  padding: 10px;
+  width: 250px;
+  height: 260px;
+}
+.--promo-book-desc h4 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  height: 50px;
+  font-weight: bold;
+}
+.--promo-book-desc small {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 14px;
+  height: 20px;
+  color: gray;
+  font-style: italic;
+}
+.--promo-book-desc p {
+  overflow: hidden;
+  white-space: pre-wrap;
+  height: 80px;
+  margin-top: 10px;
+  padding-right: 5px;
+  text-align: justify;
+  text-overflow: ellipsis;
+}
+.--promo-book-desc h5 {
+  color: green;
+  font-weight: 700;
+}
+.--promo-book-desc button {
+  display: block;
+  border: none;
+  width: 100%;
+  margin-top: 10px;
+  height: 30px;
+  font-weight: 700;
+  background-color: #373737;
+  color: #fff;
+}
+
+/* List Book */
+.list--book-title {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 80px;
+}
+.list--book-title p {
+  font-size: 30px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+}
+.book--list-container {
+  margin-left: 80px;
+  max-width: 1200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+.--list-book-box {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+}
+.--list-book-image img {
+  width: 200px;
+  height: 280px;
+}
+.--list-book-desc {
+  height: 100px;
+  width: 200px;
+  margin-top: 10px;
+}
+.--list-book-desc h4 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 20px;
+  height: 50px;
+  font-weight: bold;
+}
+.--list-book-desc small {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 14px;
+  height: 20px;
+  color: gray;
+  font-style: italic;
+}
+.--list-book-desc h5 {
+  margin-top: 10px;
+  color: green;
+  font-weight: 700;
+}

@@ -4,9 +4,13 @@ import { API } from "../../config/api";
 import { useHistory } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import DetailBookImg from "../../asssets/detail-cover.png";
 import { AppContext } from "../../Context/globalContext";
+import NavbarLogin from "../../Components/NavbarLogin/NavbarLogin";
+import cart from "../../asssets/cart-btn.png";
+import Loading from "../../Components/Loading/Loading";
 
-const DetailBook = ({ match }) => {
+const DetailBookPage = ({ match }) => {
   const booksList = true;
   const [loading, setLoading] = useState(false);
   const [book, setBook] = useState({
@@ -64,7 +68,7 @@ const DetailBook = ({ match }) => {
       type: "ADD_CART",
       payload: book,
     });
-    history.push("/");
+    history.push("/home");
   };
 
   useEffect(() => {
@@ -74,35 +78,39 @@ const DetailBook = ({ match }) => {
   return (
     <>
       {loading ? (
-        <h1>Loading</h1>
+        <Loading />
       ) : (
         <div className="beranda-container">
+          <NavbarLogin />
           <div className="beranda--container-content">
             <div className="book--detail-container">
               <div className="book--detail-title">
                 <div className="detail-content-image">
-                  <img src={thumbnail} alt="gambar-buku" />
+                  <img
+                    src={thumbnail ? thumbnail : DetailBookImg}
+                    alt="gambar-buku"
+                  />
                 </div>
                 <div className="detail-content-description">
                   <div className="content-book-title">
-                    <h2>{title}</h2>
-                    <p>{author}</p>
+                    <h2>{title ? title : "tidak ada title"}</h2>
+                    <p>{author ? author : null}</p>
                   </div>
                   <div className="content-book-publish">
                     <h2>Publication date</h2>
-                    <p>{publicationDate}</p>
+                    <p>{publicationDate ? publicationDate : null}</p>
                   </div>
                   <div className="content-book-page">
                     <h2>Pages</h2>
-                    <p>{pages}</p>
+                    <p>{pages ? pages : null}</p>
                   </div>
                   <div className="content-book-Type">
                     <h2>ISBN</h2>
-                    <p>{ISBN}</p>
+                    <p>{ISBN ? ISBN : null}</p>
                   </div>
-                  <div className="content-book-Type">
+                  <div className="content-book-price">
                     <h2>Price</h2>
-                    <p>{price}</p>
+                    <p>Rp. {price ? price : null}</p>
                   </div>
                 </div>
               </div>
@@ -111,16 +119,17 @@ const DetailBook = ({ match }) => {
                   <h2>About This Book</h2>
                 </div>
                 <div className="--detail-description-text">
-                  <p>{description}</p>
+                  <p>{description ? description : null}</p>
                 </div>
               </div>
               <div className="book-detail-action">
                 <div
+                  className="action-adding"
                   onClick={() => handelAddCart()}
-                  className={booksList ? "action-adding" : "active"}
+                  // className={booksList ? "a" : "active"}
                 >
-                  <p>Add TO CHART</p>
-                  <AddIcon className="add-btn" />
+                  <p>Add CHART</p>
+                  <img src={cart} alt="cart" />
                 </div>
               </div>
             </div>
@@ -131,4 +140,4 @@ const DetailBook = ({ match }) => {
   );
 };
 
-export default DetailBook;
+export default DetailBookPage;

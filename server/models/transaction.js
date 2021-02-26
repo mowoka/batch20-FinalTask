@@ -10,8 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Transaction.belongsTo(models.User, {
-        as: "user",
+        as: "Users",
         foreignKey: "userId",
+      });
+      Transaction.hasMany(models.PurchaseBook, {
+        as: "purchasebook",
+        foreignKey: "transactionId",
       });
     }
   }
@@ -19,7 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     {
       userId: DataTypes.INTEGER,
       attachment: DataTypes.STRING,
-      booksPurcahased: DataTypes.STRING,
       totalPayment: DataTypes.INTEGER,
       status: DataTypes.STRING,
     },

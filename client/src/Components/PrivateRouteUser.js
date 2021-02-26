@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { AppContext } from "../Context/globalContext";
+import Loading from "./Loading/Loading";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRouteUser = ({ component: Component, ...rest }) => {
   const [state] = useContext(AppContext);
   const { isLogin, isLoading, user } = state;
   return (
@@ -10,7 +11,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         isLoading ? (
-          <h1>Loading</h1>
+          <Loading />
         ) : isLogin && user.role == "User" ? (
           <Component {...props} />
         ) : (
@@ -21,4 +22,4 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-export default PrivateRoute;
+export default PrivateRouteUser;

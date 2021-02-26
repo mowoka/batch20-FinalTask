@@ -1,10 +1,17 @@
-const { Transaction, User } = require("../../models");
+const { Transaction, PurchaseBook, User, Book } = require("../../models");
 
 const Joi = require("joi");
 
 exports.addTransaction = async (req, res) => {
   try {
-    const { booksPurcahased, totalPayment, status } = req.body;
+    const { booksPurcahased, totalPayment } = req.body;
+
+    // Operekan untuk  mesimulasikan bookPurchase
+    const bookPurchase = JSON.parse(booksPurcahased);
+    // console.log(bookPurchase.length);
+    // book.map((book) => console.log(book));
+    // console.log(totalPayment);
+
     // validatasi untuk input Transcation
     const schema = Joi.object({
       userId: Joi.number().integer().min(1).required(),
@@ -29,9 +36,30 @@ exports.addTransaction = async (req, res) => {
       userId: req.user.id,
       attachment: req.files.attachment[0].filename,
       totalPayment: totalPayment,
-      booksPurcahased: booksPurcahased,
       status: "Pending",
     });
+
+    if (bookPurchase.length > 1) {
+      bookPurchase.map(async (book) => {
+        await PurchaseBook.create({
+          transactionId: transaction.id,
+          bookId: book,
+          status: "Pending",
+        });
+      });
+    } else {
+      await PurchaseBook.create({
+        transactionId: transaction.id,
+        bookId: bookPurchase[0],
+        status: "Pending",
+      });
+    }
+
+    // const purchasebook = await PurchaseBook.findAll({
+    //   where: {
+    //     transactionId: transaction.id,
+    //   },
+    // });
 
     res.send({
       status: "Success",
@@ -51,17 +79,47 @@ exports.addTransaction = async (req, res) => {
 exports.getTransactions = async (req, res) => {
   try {
     const transactions = await Transaction.findAll({
-      include: {
-        model: User,
-        as: "user",
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "password", "role", "email"],
+      include: [
+        {
+          model: User,
+          as: "Users",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password"],
+          },
         },
-      },
+        {
+          model: PurchaseBook,
+          as: "purchasebook",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
     });
+
+    // const transactionPurcasebook = await Transaction.findAll({
+    //   // include: {
+    //   //   model: User,
+    //   //   as: "Users",
+    //   //   attributes: {
+    //   //     exclude: ["createdAt", "updatedAt", "password"],
+    //   //   },
+    //   // },
+    //   include: {
+    //     model: PurchaseBook,
+    //     as: "purchasebook",
+    //     attributes: {
+    //       exclude: ["createdAt", "updatedAt"],
+    //     },
+    //   },
+    //   attributes: {
+    //     exclude: ["createdAt", "updatedAt"],
+    //   },
+    // });
+
     res.send({
       status: "Successs",
       message: "Transactions Successfully Retreived ",
@@ -104,13 +162,22 @@ exports.editTransaction = async (req, res) => {
       where: {
         id,
       },
-      include: {
-        model: User,
-        as: "user",
-        attributes: {
-          exclude: ["createdAt", "updatedAt", "password", "role", "email"],
+      include: [
+        {
+          model: User,
+          as: "Users",
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "password"],
+          },
         },
-      },
+        {
+          model: PurchaseBook,
+          as: "purchasebook",
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
@@ -130,3 +197,45 @@ exports.editTransaction = async (req, res) => {
     });
   }
 };
+
+// exports.getTrasactionUser = async (req, res) => {
+//   try {
+//     const transaction = await User.findOne({
+//       where: {
+//         id: req.user.id,
+//       },
+//       include: [
+//         {
+//           model: Transaction,
+//           as: "Transactions",
+//           attributes: {
+//             exclude: ["createdAt", "updatedAt", "password"],
+//           },
+//         },
+//         // {
+//         //   model: PurchaseBook,
+//         //   as: "purchasebook",
+//         //   attributes: {
+//         //     exclude: ["createdAt", "updatedAt"],
+//         //   },
+//         // },
+//       ],
+//       attributes: {
+//         exclude: ["createdAt", "updatedAt"],
+//       },
+//     });
+
+//     res.send({
+//       status: "Success",
+//       message: `Transcation with id ${id} Successfully Update`,
+//       data: {
+//         transaction,
+//       },
+//     });
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).send({
+//       message: "Server Error",
+//     });
+//   }
+// };

@@ -22,10 +22,12 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar--container">
-        <div className="navbar--menu-logo">ini logo</div>
+        <div className="navbar--menu-logo">
+          <img src="image/logo.png" alt="logo" />
+        </div>
         <div className="navbar--menu-button">
           <div className="navabar--btn-login">
-            <button onClick={() => handleShowLogin()} className="btn ">
+            <button onClick={() => handleShowLogin()} className="btn">
               Login
             </button>
           </div>
@@ -37,10 +39,7 @@ const Navbar = () => {
             />
           ) : null}
           <div className="navabar--btn-register">
-            <button
-              onClick={() => handleShowDaftar()}
-              className="btn btn-primary"
-            >
+            <button onClick={() => handleShowDaftar()} className="btn">
               Register
             </button>
           </div>

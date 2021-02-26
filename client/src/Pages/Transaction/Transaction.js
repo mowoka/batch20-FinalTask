@@ -4,28 +4,51 @@ import TransactionComponent from "../../Components/TransactionComponent";
 import { API } from "../../config/api";
 import { AppContext } from "../../Context/globalContext";
 import { Link } from "react-router-dom";
+import Loading from "../../Components/Loading/Loading";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import BookIcon from "@material-ui/icons/Book";
 
 const Transaction = () => {
   const [showDropDownProfile, setShowDropDownProfile] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [book, setBook] = useState([]);
   const [state, dispatch] = useContext(AppContext);
   const [transactions, setTransactions] = useState([]);
   const { user } = state;
-  const linkImageDefault = `http://localhost:5000/uploads/${user.profileImage}`;
+  const linkImage = `http://localhost:5000/uploads/${user.avatar}`;
 
   const getTransactions = async () => {
     try {
-      setIsLoading(true);
-
       const response = await API.get("/transaction");
-
-      setIsLoading(false);
 
       setTransactions(response.data.data.transactions);
     } catch (error) {
       console.log("error get data");
+    }
+  };
+
+  const GetBooks = async () => {
+    try {
+      const response = await API.get("/books");
+
+      setBook(response.data.data.books);
+    } catch (error) {
+      console.log("Books not Found");
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const response = await API.get("/get-admin");
+
+      if (response.data.status == "Success") {
+        dispatch({
+          type: "USER_LOADED",
+          payload: response.data.data.user,
+        });
+      }
+    } catch (error) {
+      console.log("Error Get Profile User");
     }
   };
 
@@ -67,7 +90,7 @@ const Transaction = () => {
 
       console.log(Updateresponse);
       const updatedPosts = transactions.map((post) =>
-        post.id === Updateresponse.id ? Updateresponse : post
+        post.id == Updateresponse.id ? Updateresponse : post
       );
 
       setTransactions(updatedPosts);
@@ -77,18 +100,24 @@ const Transaction = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
+
+    getUser();
+    GetBooks();
     getTransactions();
+
+    setIsLoading(false);
   }, []);
 
   return (
     <>
       {isLoading ? (
-        <h1>loading</h1>
+        <Loading />
       ) : (
         <div className="transaction--container">
           <div className="transaction--menu-header">
             <div className="header--menu-logo">
-              <img src="image/beranda/wow-icon.png" alt="wow-logo" />
+              <img src="image/logo.png" alt="logo" />
             </div>
             <div className="header--menu-profile">
               <img
@@ -97,18 +126,14 @@ const Transaction = () => {
                   position: "relative",
                   borderRadius: "50%",
                 }}
-                src={
-                  linkImageDefault
-                    ? linkImageDefault
-                    : "image/beranda/admin-icon.png"
-                }
+                src={linkImage}
                 alt="admin-avatar"
                 onClick={handleShowDropDownProfile}
               />
               {showDropDownProfile ? (
                 <div className="dropdown--menu-profile">
                   <div className="dropdown--poligon">
-                    <img src="image/beranda/action-icon-2.png" alt="arrow" />
+                    <img src="image/action-icon-2.png" alt="arrow" />
                   </div>
                   <div className="dropdown--menu-list">
                     <div className="dropdown--addbook">
@@ -171,6 +196,7 @@ const Transaction = () => {
                       data={data}
                       getUserId={getUserId}
                       key={data.id}
+                      book={book}
                     />
                   ))}
                 </tbody>

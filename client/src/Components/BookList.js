@@ -1,25 +1,24 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
 
 const BookList = ({ book, goDetailBookPage }) => {
+  const linkImg = `http://localhost:5000/uploads/${book.thumbnail}`;
+
   return (
     <>
-      <Card
-        onClick={() => goDetailBookPage(book.id)}
-        style={{ width: "18rem" }}
+      <div
+        onClick={goDetailBookPage ? () => goDetailBookPage(book.id) : null}
+        key={book.id}
+        className="--list-book-box"
       >
-        <Card.Img
-          variant="top"
-          style={{ height: "200px" }}
-          src={`http://localhost:5000/uploads/${book.thumbnail}`}
-        />
-        <Card.Body>
-          <Card.Title>{book.title}</Card.Title>
-          {/* <Card.Text>{book.description}</Card.Text> */}
-          <Card.Text>{book.price}</Card.Text>
-          <Button variant="primary">ADD TO CART</Button>
-        </Card.Body>
-      </Card>
+        <div className="--list-book-image">
+          <img src={linkImg} alt="image-book" />
+        </div>
+        <div className="--list-book-desc">
+          <h4>{book.title}</h4>
+          <small>by {book.author}</small>
+          <h5>Rp. {book.price}</h5>
+        </div>
+      </div>
     </>
   );
 };

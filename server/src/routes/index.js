@@ -21,6 +21,7 @@ const {
   addTransaction,
   getTransactions,
   editTransaction,
+  getTrasactionUser,
 } = require("../controllers/transactionsController");
 // Declaire Routes
 // User
@@ -36,7 +37,15 @@ router.patch(
   uploadProfile("avatar"),
   editProfile
 );
+router.patch(
+  "/profile-admin",
+  authenticated,
+  isAdmin,
+  uploadProfile("avatar"),
+  editProfile
+);
 router.get("/get-user", authenticated, isUser, getUser);
+router.get("/get-admin", authenticated, isAdmin, getUser);
 
 // Books
 router.post(
@@ -60,6 +69,8 @@ router.post(
 );
 router.get(
   "/transaction",
+  authenticated,
+  isAdmin,
   // uploadProof("attachment"),
   getTransactions
 );

@@ -26,11 +26,11 @@
   margin-left: 1px;
   font-size: 18px;
   text-align: center;
-  background-color: #d60000;
+  background-color: #393939;
   color: #fff;
 }
 .form-btn:hover {
-  background-color: #d60000;
+  background-color: #393939;
 }
 .daftar-container .end-text {
   margin-top: 18px;
@@ -42,6 +42,7 @@
 .daftar-container .end-text span {
   font-weight: bold;
   cursor: pointer;
+  color: #393939;
 }
 .daftar-message {
   margin-top: 2px;

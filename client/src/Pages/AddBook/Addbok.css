@@ -82,3 +82,19 @@
   text-align: center;
   color: #fff;
 }
+#thumbnail-btn {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+#bookAttachment-btn {
+  opacity: 0;
+  position: absolute;
+  z-index: -1;
+}
+.--bg-green {
+  background-color: green;
+}
+.--bg-red {
+  background-color: red;
+}

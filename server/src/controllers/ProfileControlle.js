@@ -36,7 +36,7 @@ exports.editProfile = async (req, res) => {
         id: req.user.id,
       },
       attributes: {
-        exclude: ["createdAt", "updatedAt"],
+        exclude: ["createdAt", "updatedAt", "password"],
       },
     });
 
@@ -69,13 +69,13 @@ exports.getUser = async (req, res) => {
     if (!user) {
       return res.send({
         status: "Error",
-        message: `Book with id ${req.user.id} Not Found`,
+        message: `User with id ${req.user.id} Not Found`,
       });
     }
 
     res.send({
       status: "Success",
-      message: `Book with id ${req.user.id} Successfully Retreived`,
+      message: `User with id ${req.user.id} Successfully Retreived`,
       data: {
         user,
       },

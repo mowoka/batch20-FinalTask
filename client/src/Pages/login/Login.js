@@ -41,20 +41,16 @@ function Login({ handleLinkLogin, showLogin, handleCloseLogin }) {
 
       setMessage(post.data.message);
 
-      if (post.data.status === "Success") {
+      if (post.data.status == "Success") {
         setAuthToken(post.data.data.user.token);
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: post.data.data.user,
+        });
         if (post.data.data.user.role == "ADMIN") {
-          dispatch({
-            type: "LOGIN_SUCCESS",
-            payload: post.data.data.user,
-          });
           history.push("/transactions");
         } else {
-          dispatch({
-            type: "LOGIN_SUCCESS",
-            payload: post.data.data.user,
-          });
-          history.push("/");
+          history.push("/home");
         }
       }
     } catch (error) {
@@ -109,17 +105,14 @@ function Login({ handleLinkLogin, showLogin, handleCloseLogin }) {
               />
               <input
                 type="submit"
-                className="btn btn-danger form-btn"
+                className="btn form-sumbit-btn"
                 value="Sign in"
               />
             </form>
             <p className="end-text">
               Don't have an account ? Klik
-              <span onClick={handleLinkLogin}>Here</span>
+              <span onClick={handleLinkLogin}> Here</span>
             </p>
-            {/* <p>
-          <pre>{JSON.stringify(loginFormData, null, 2)}</pre>
-        </p> */}
           </div>
         </div>
       </Modal.Body>

@@ -52,9 +52,45 @@ const Register = ({ handleLinkDaftar, showDaftar, handleCloseDaftar }) => {
         //   payload: post.data.data.user,
         // });
         setMessage(post.data.message);
+
+        login();
       }
 
       console.log(post.data.data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const login = async () => {
+    try {
+      const body = JSON.stringify({
+        email,
+        password,
+      });
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const post = await API.post("/login", body, config);
+
+      setMessage(post.data.message);
+
+      if (post.data.status == "Success") {
+        setAuthToken(post.data.data.user.token);
+        dispatch({
+          type: "LOGIN_SUCCESS",
+          payload: post.data.data.user,
+        });
+        if (post.data.data.user.role == "ADMIN") {
+          history.push("/transactions");
+        } else {
+          history.push("/home");
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -121,11 +157,7 @@ const Register = ({ handleLinkDaftar, showDaftar, handleCloseDaftar }) => {
                 name="fullName"
                 onChange={(e) => onChangeRegister(e)}
               />
-              <input
-                type="submit"
-                className="btn btn-danger form-btn "
-                value="Sign Up"
-              />
+              <input type="submit" className="btn form-btn " value="Sign Up" />
             </form>
             <p className="end-text">
               Already have an account ? Klik

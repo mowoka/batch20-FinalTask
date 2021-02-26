@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 
-const TransactionComponent = ({ index, data, getUserId }) => {
+const TransactionComponent = ({ index, data, getUserId, book }) => {
+  const findbook = book.find((book) => book.id == data.purchasebook[0].bookId);
+
   const [showDropDown, setShowDropDown] = useState(false);
 
   const handleDropDownMenu = () => setShowDropDown(!showDropDown);
   return (
     <tr key={data.id}>
       <td>{index + 1}</td>
-      <td>{data.user.fullName}</td>
+      <td>{data.Users.fullName}</td>
       <td>
         <a href={`http://localhost:5000/uploads/${data.attachment}`}>
           Image Proof
         </a>
       </td>
-      <td>KISAH TIGA PANGERAN</td>
+      <td>{findbook.title}</td>
       <td
         className={
           data.userStatus === "Active" ? "text-active" : "text-deactive"

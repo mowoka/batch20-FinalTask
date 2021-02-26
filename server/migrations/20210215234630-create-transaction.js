@@ -21,9 +21,6 @@ module.exports = {
       attachment: {
         type: Sequelize.STRING,
       },
-      booksPurcahased: {
-        type: Sequelize.STRING,
-      },
       totalPayment: {
         type: Sequelize.INTEGER,
       },
