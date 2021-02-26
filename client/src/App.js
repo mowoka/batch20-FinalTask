@@ -14,6 +14,8 @@ import Transaction from "./Pages/Transaction/Transaction";
 import AddBook from "./Pages/AddBook/AddBook";
 import Checkout from "./Pages/Checkout/Checkout";
 import DownloadBook from "./Pages/DownloadBook/DownloadBook";
+// import Riport from "./Pages/Riport/Riport";
+import Report from "./Pages/Report/Report";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 if (localStorage.token) {
@@ -66,6 +68,7 @@ function App() {
             component={Transaction}
           />
           <PrivateRouteAdmin path="/add-book" exact component={AddBook} />
+          <PrivateRouteAdmin path="/report" exact component={Report} />
         </Switch>
       </Router>
     </>

@@ -148,6 +148,18 @@ const Transaction = () => {
                         <p style={{ marginLeft: "10px" }}>Add Book </p>
                       </Link>
                     </div>
+                    <div className="dropdown--addbook">
+                      <Link to="/report">
+                        <BookIcon
+                          style={{
+                            color: "#929292",
+                            fontSize: "30px",
+                            marginTop: "4px",
+                          }}
+                        />
+                        <p style={{ marginLeft: "10px" }}>Report </p>
+                      </Link>
+                    </div>
                     <div className="dropdown--logout">
                       <Link onClick={handleLogout} to="/">
                         <ExitToAppIcon
